@@ -1,16 +1,14 @@
 # Mac Media Key Forwarder
 
-Mac Media Key Forwarder for [iTunes](https://www.apple.com/itunes/) and [Spotify](http://www.spotify.com).
+Mac Media Key Forwarder for [Apple Music](https://www.apple.com/apple-music/) and [Spotify](http://www.spotify.com).
 
-Forwards media keys to iTunes or Spotify directly.
+Forwards media keys to Apple Music or Spotify directly.
 
 You can prioritize which app you would like to control or you can go with the default behaviour which controls the running app.
 
 The app runs in the menu bar.
 
-Download the compiled application from my [Releases](https://github.com/quentinlesceller/macmediakeyforwarder/releases).
-
-If you want even more control over what you want to control you should try [beardedspice](http://beardedspice.github.io).
+Download the compiled application from my [Releases](https://github.com/quppi/macmediakeyforwarder/releases).
 
 ## Issues you should know about
 
@@ -44,14 +42,16 @@ The app itself is compatible with Sonoma or later, but you need to add it as tru
 You can do this with these steps:
 
 1. Go to **System Preferences** > **Security & Privacy**
-2. Open the **Privacy** tab, and look for **Accessibility** in the left list
-3. Turn on the checkbox for **MacMediaKeyForwarder.app** in the right list
-4. Look for **Automation** in the left list
-5. Turn on the checkbox for **iTunes.app** and **Spotifiy.app** under **MacMediaKeyForwarder.app** in the right list
+2. Go to **Accessibility**
+3. Turn on the checkbox for **MacMediaKeyForwarder.app**
+4. Go back and go to **Automation**
+5. Turn on the checkbox for **Music.app** and **Spotifiy.app** under **MacMediaKeyForwarder.app**
 6. Run the app again
 
 ## Contributors :
 
+- Milan Toth ([@milgra](https://github.com/milgra))
+- Quentin Le Sceller ([@quentinlesceller](https://github.com/quentinlesceller))
 - Michael Dorner ([@michaeldorner](http://github.com/michaeldorner))
 - Matt Chaput ([@mchaput](http://github.com/mchaput))
 - Ben Kropf ([@ben-kropf](http://github.com/ben-kropf))
@@ -71,8 +71,6 @@ You can do this with these steps:
 - Andy White ([@arcwhite](https://github.com/arcwhite))
 - xjbeta ([@xjbeta](https://github.com/xjbeta))
 - Jules Coynel ([@jcoynel](https://github.com/jcoynel))
-- Milan Toth ([@milgra](https://github.com/milgra))
-- Quentin Le Sceller ([@quentinlesceller](https://github.com/quentinlesceller))
 - Tom Underhill ([@tom-un](https://github.com/tom-un))
 
 Thank you!!!
@@ -83,6 +81,7 @@ _What's new in version 4.0 :_
 
 - Complete rewrite of the app in Swift
 - Added support for Tahoe
+- Changed iTunes to Apple Music
 
 _What's new in version 3.1.2 :_
 
