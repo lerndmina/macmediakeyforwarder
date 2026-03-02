@@ -10,12 +10,14 @@ final class MediaPlayerController {
     let appleMusic = AppleMusicBridge()
     let spotify = SpotifyBridge()
     let tidal = TidalBridge()
+    let deezer = DeezerBridge()
 
     /// Key-hold state machine for iTunes-priority fast-forward/rewind detection.
     private var keyHoldMachine = KeyHoldStateMachine()
 
     init(preferences: AppPreferences) {
         self.preferences = preferences
+        deezer.connectIfRunning()
     }
 
     // MARK: - Event Handling
@@ -29,7 +31,7 @@ final class MediaPlayerController {
 
         // Auto-pause — only forward when at least one player is running
         if preferences.pauseMode == .automatic {
-            if !spotify.isRunning && !appleMusic.isRunning && !tidal.isRunning {
+            if !spotify.isRunning && !appleMusic.isRunning && !tidal.isRunning && !deezer.isRunning {
                 return
             }
         }
@@ -51,6 +53,8 @@ final class MediaPlayerController {
             handleSpotifyPriorityKeyDown(event)
         case .tidal:
             handleTidalPriorityKeyDown(event)
+        case .deezer:
+            handleDeezerPriorityKeyDown(event)
         }
     }
 
@@ -96,6 +100,17 @@ final class MediaPlayerController {
             tidal.nextTrack()
         case .previous, .rewind:
             tidal.previousTrack()
+        }
+    }
+
+    private func handleDeezerPriorityKeyDown(_ event: MediaKeyEvent) {
+        switch event.keyCode {
+        case .play:
+            deezer.playPause()
+        case .next, .fast:
+            deezer.nextTrack()
+        case .previous, .rewind:
+            deezer.previousTrack()
         }
     }
 

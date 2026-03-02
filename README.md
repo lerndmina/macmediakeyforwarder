@@ -1,6 +1,6 @@
 # Mac Media Key Forwarder
 
-Mac Media Key Forwarder directly forwards media keys (play/pause, next, previous) to your preferred app. This prevents accidentally controlling the currently registered app with `MPRemoteCommandCenter`, e.g. a currently playing YouTube video.
+Mac Media Key Forwarder (MMKF) directly forwards media keys (play/pause, next, previous) to your preferred app. This prevents accidentally controlling the currently registered app with `MPRemoteCommandCenter`, e.g. a currently playing YouTube video.
 
 You can prioritize which app you would like to control or you can go with the default behaviour which controls the last active app.
 
@@ -11,8 +11,9 @@ Download the compiled application from my [Releases](https://github.com/quppi/ma
 ## Supported Applications
 
 - [Apple Music](https://www.apple.com/apple-music/)
-- [Spotify](http://www.spotify.com)
-- [Tidal](http://www.tidal.com)
+- [Spotify](https://www.spotify.com)
+- [Tidal](https://www.tidal.com)
+- [Deezer](https://www.deezer.com)
 
 ## Issues you should know about
 
@@ -21,7 +22,15 @@ The app listens on the event tap for key events. This causes problems in some ra
 - when changing search engine in Safari's preferences window
 - when trying to allow third-party kernel extensions
 
-In these cases simply pause Mac Media Key Forwarder from it's menu.
+In these cases simply pause MMKF from it's menu.
+
+### Deezer support
+
+Deezer doesn't expose playback controls via the Apple ScriptingBridge. Play / Pause is controlled through sending virtual key events (spacebar) to the running process directly. This doesn't work for next / previous track functionality, as these are implemented through Electron menu accelerators. Their codepath however is only triggered, when the appwindow is active (in the foreground).
+
+As a solution, MMKF restarts Deezer with the Chrome DevTools Protocol enabled (`--remote-debugging-port`). This allows MMKF to access the Deezer `window.dzPlayer.control` object through a websocket and control playback this way.
+
+This websocket is only accessible from localhost and not exposed to the internet. However any locally running app could in theory access it.
 
 ## Installation & Compatibility prior to Sonoma
 
@@ -80,6 +89,10 @@ You can do this with these steps:
 Thank you!!!
 
 ## Changelog
+
+_What's new in version 4.2 :_
+
+- added support for Deezer
 
 _What's new in version 4.1 :_
 

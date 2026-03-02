@@ -78,6 +78,14 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         tidalItem.target = self
         priorityItems.append(tidalItem)
 
+        let deezerItem = menu.addItem(
+            withTitle: String(localized: "Prioritize Deezer"),
+            action: #selector(prioritizeDeezer),
+            keyEquivalent: ""
+        )
+        deezerItem.target = self
+        priorityItems.append(deezerItem)
+
         menu.addItem(.separator())
 
         // Login item & hide
@@ -183,6 +191,11 @@ final class StatusBarController: NSObject, NSMenuDelegate {
 
     @objc private func prioritizeTidal() {
         preferences.priority = .tidal
+        updatePriorityCheckmarks()
+    }
+
+    @objc private func prioritizeDeezer() {
+        preferences.priority = .deezer
         updatePriorityCheckmarks()
     }
 
