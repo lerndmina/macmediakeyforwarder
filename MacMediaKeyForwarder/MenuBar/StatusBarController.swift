@@ -7,10 +7,12 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     private let eventTap: MediaKeyEventTap
 
     private var statusItem: NSStatusItem!
-    private var priorityItems: [NSMenuItem] = []
     private var pauseItems: [NSMenuItem] = []
     private var startupItem: NSMenuItem!
     private var hideFromMenuBarItem: NSMenuItem!
+
+    /// Opens the settings / targets window (wired from `AppDelegate`).
+    var onOpenSettings: (() -> Void)?
 
     init(preferences: AppPreferences, eventTap: MediaKeyEventTap) {
         self.preferences = preferences
@@ -22,19 +24,26 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     // MARK: - Setup
 
     private func setupStatusItem() {
-        // Version string
         let bundleInfo = Bundle.main.infoDictionary ?? [:]
         let version = bundleInfo["CFBundleShortVersionString"] as? String ?? "?"
         let versionString = "Version \(version)"
 
-        // Build menu
         let menu = NSMenu()
         menu.delegate = self
 
         menu.addItem(withTitle: versionString, action: nil, keyEquivalent: "")
         menu.addItem(.separator())
 
-        // Pause options
+        let settingsItem = menu.addItem(
+            withTitle: String(localized: "Targets & Settings…"),
+            action: #selector(openSettings),
+            keyEquivalent: ","
+        )
+        settingsItem.target = self
+        settingsItem.keyEquivalentModifierMask = [.command]
+
+        menu.addItem(.separator())
+
         let pauseItem = menu.addItem(
             withTitle: String(localized: "Pause"),
             action: #selector(manualPause),
@@ -53,42 +62,6 @@ final class StatusBarController: NSObject, NSMenuDelegate {
 
         menu.addItem(.separator())
 
-        // Priority options
-        let iTunesItem = menu.addItem(
-            withTitle: String(localized: "Prioritize iTunes"),
-            action: #selector(prioritizeITunes),
-            keyEquivalent: ""
-        )
-        iTunesItem.target = self
-        priorityItems.append(iTunesItem)
-
-        let spotifyItem = menu.addItem(
-            withTitle: String(localized: "Prioritize Spotify"),
-            action: #selector(prioritizeSpotify),
-            keyEquivalent: ""
-        )
-        spotifyItem.target = self
-        priorityItems.append(spotifyItem)
-
-        let tidalItem = menu.addItem(
-            withTitle: String(localized: "Prioritize Tidal"),
-            action: #selector(prioritizeTidal),
-            keyEquivalent: ""
-        )
-        tidalItem.target = self
-        priorityItems.append(tidalItem)
-
-        let deezerItem = menu.addItem(
-            withTitle: String(localized: "Prioritize Deezer"),
-            action: #selector(prioritizeDeezer),
-            keyEquivalent: ""
-        )
-        deezerItem.target = self
-        priorityItems.append(deezerItem)
-
-        menu.addItem(.separator())
-
-        // Login item & hide
         startupItem = menu.addItem(
             withTitle: String(localized: "Open at login"),
             action: #selector(toggleStartupItem),
@@ -105,7 +78,6 @@ final class StatusBarController: NSObject, NSMenuDelegate {
 
         menu.addItem(.separator())
 
-        // Support & updates
         let donateItem = menu.addItem(
             withTitle: String(localized: "Donate if you like the app"),
             action: #selector(support),
@@ -127,7 +99,6 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         )
         quitItem.target = self
 
-        // Status item
         let image = NSImage(named: "icon")
         image?.isTemplate = true
 
@@ -138,15 +109,12 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         statusItem.behavior = .removalAllowed
         statusItem.isVisible = !preferences.hideFromMenuBar
 
-        // Initial UI state
         updatePauseCheckmarks()
-        updatePriorityCheckmarks()
         updateStartupItemCheckmark()
     }
 
     // MARK: - Public
 
-    /// Makes the status item visible again (used when re-opening the app).
     func showStatusItem() {
         if preferences.hideFromMenuBar {
             preferences.hideFromMenuBar = false
@@ -177,26 +145,8 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         eventTap.startListening()
     }
 
-    // MARK: - Priority Actions
-
-    @objc private func prioritizeITunes() {
-        preferences.priority = .iTunes
-        updatePriorityCheckmarks()
-    }
-
-    @objc private func prioritizeSpotify() {
-        preferences.priority = .spotify
-        updatePriorityCheckmarks()
-    }
-
-    @objc private func prioritizeTidal() {
-        preferences.priority = .tidal
-        updatePriorityCheckmarks()
-    }
-
-    @objc private func prioritizeDeezer() {
-        preferences.priority = .deezer
-        updatePriorityCheckmarks()
+    @objc private func openSettings() {
+        onOpenSettings?()
     }
 
     // MARK: - Other Actions
@@ -230,12 +180,6 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     private func updatePauseCheckmarks() {
         pauseItems[0].state = preferences.pauseMode == .paused ? .on : .off
         pauseItems[1].state = preferences.pauseMode == .automatic ? .on : .off
-    }
-
-    private func updatePriorityCheckmarks() {
-        for (index, item) in priorityItems.enumerated() {
-            item.state = (index + 1) == preferences.priority.rawValue ? .on : .off
-        }
     }
 
     private func updateStartupItemCheckmark() {
