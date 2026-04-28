@@ -15,6 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let eventTap = MediaKeyEventTap()
     private var playerController: MediaPlayerController!
     private var statusBarController: StatusBarController!
+    private lazy var settingsWindowController = SettingsWindowController(preferences: preferences)
 
     // MARK: - App Lifecycle
 
@@ -36,6 +37,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Create status bar UI
         statusBarController = StatusBarController(preferences: preferences, eventTap: eventTap)
+        statusBarController.onOpenSettings = { [weak self] in
+            self?.settingsWindowController.showSettings()
+        }
 
         // Start listening (unless manually paused)
         if preferences.pauseMode != .paused {

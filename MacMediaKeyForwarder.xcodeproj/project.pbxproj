@@ -23,6 +23,12 @@
 		CC00000000000000000001AC /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000AC /* ServiceManagement.framework */; };
 		CC00000000000000000001AD /* TidalBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000AD /* TidalBridge.swift */; };
 		CC00000000000000000001AE /* DeezerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000AE /* DeezerBridge.swift */; };
+		CC00000000000000000001B0 /* PlayerTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000B0 /* PlayerTarget.swift */; };
+		CC00000000000000000001B1 /* MediaCommandHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000B1 /* MediaCommandHandler.swift */; };
+		CC00000000000000000001B2 /* NowPlayingInfoResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000B2 /* NowPlayingInfoResolver.swift */; };
+		CC00000000000000000001B3 /* ActiveTargetRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000B3 /* ActiveTargetRouter.swift */; };
+		CC00000000000000000001B4 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000B4 /* SettingsWindowController.swift */; };
+		CC00000000000000000001B5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00000000000000000000B5 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +50,12 @@
 		CC00000000000000000000AC /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		CC00000000000000000000AD /* TidalBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TidalBridge.swift; sourceTree = "<group>"; };
 		CC00000000000000000000AE /* DeezerBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeezerBridge.swift; sourceTree = "<group>"; };
+		CC00000000000000000000B0 /* PlayerTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTarget.swift; sourceTree = "<group>"; };
+		CC00000000000000000000B1 /* MediaCommandHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCommandHandler.swift; sourceTree = "<group>"; };
+		CC00000000000000000000B2 /* NowPlayingInfoResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingInfoResolver.swift; sourceTree = "<group>"; };
+		CC00000000000000000000B3 /* ActiveTargetRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTargetRouter.swift; sourceTree = "<group>"; };
+		CC00000000000000000000B4 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		CC00000000000000000000B5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +96,7 @@
 				CC00000000000000000000D3 /* MediaControl */,
 				CC00000000000000000000D4 /* Preferences */,
 				CC00000000000000000000D5 /* MenuBar */,
+				CC00000000000000000000D7 /* Settings */,
 				CC00000000000000000000D6 /* Resources */,
 				336F74561E07E136009BCC1B /* Info.plist */,
 			);
@@ -124,6 +137,9 @@
 				CC00000000000000000000AD /* TidalBridge.swift */,
 				CC00000000000000000000AE /* DeezerBridge.swift */,
 				CC00000000000000000000A6 /* KeyHoldStateMachine.swift */,
+				CC00000000000000000000B1 /* MediaCommandHandler.swift */,
+				CC00000000000000000000B2 /* NowPlayingInfoResolver.swift */,
+				CC00000000000000000000B3 /* ActiveTargetRouter.swift */,
 				CC00000000000000000000A7 /* MediaPlayerController.swift */,
 			);
 			path = MediaControl;
@@ -133,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				CC00000000000000000000A8 /* AppPreferences.swift */,
+				CC00000000000000000000B0 /* PlayerTarget.swift */,
 				CC00000000000000000000A9 /* LoginItemManager.swift */,
 			);
 			path = Preferences;
@@ -144,6 +161,15 @@
 				CC00000000000000000000AA /* StatusBarController.swift */,
 			);
 			path = MenuBar;
+			sourceTree = "<group>";
+		};
+		CC00000000000000000000D7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CC00000000000000000000B4 /* SettingsWindowController.swift */,
+				CC00000000000000000000B5 /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		CC00000000000000000000D6 /* Resources */ = {
@@ -255,6 +281,12 @@
 				CC00000000000000000001AA /* StatusBarController.swift in Sources */,
 				CC00000000000000000001AD /* TidalBridge.swift in Sources */,
 				CC00000000000000000001AE /* DeezerBridge.swift in Sources */,
+				CC00000000000000000001B0 /* PlayerTarget.swift in Sources */,
+				CC00000000000000000001B1 /* MediaCommandHandler.swift in Sources */,
+				CC00000000000000000001B2 /* NowPlayingInfoResolver.swift in Sources */,
+				CC00000000000000000001B3 /* ActiveTargetRouter.swift in Sources */,
+				CC00000000000000000001B4 /* SettingsWindowController.swift in Sources */,
+				CC00000000000000000001B5 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

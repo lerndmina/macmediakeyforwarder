@@ -2,9 +2,15 @@
 
 Mac Media Key Forwarder (MMKF) directly forwards media keys (play/pause, next, previous) to your preferred app. This prevents accidentally controlling the currently registered app with `MPRemoteCommandCenter`, e.g. a currently playing YouTube video.
 
-You can prioritize which app you would like to control or you can go with the default behaviour which controls the last active app.
+You configure an ordered **whitelist** of apps that may receive media keys. **Prefer Now Playing** is **on** by default: MMKF follows the system Now Playing client when its bundle ID matches your list (via private Media Remote APIs). macOS may still log `kMRMediaRemoteFrameworkErrorDomain` / “Operation not permitted” in some environments (often under the debugger); that is usually noise unless routing actually misbehaves. Turn it off in **Targets & Settings** if you want routing from AppleScript “playing” state and list order only.
 
-The app runs in the menu bar.
+The app runs in the menu bar. Open **Targets & Settings…** (menu or **⌘,**) to edit the list, reorder entries, or add any application.
+
+**User-added apps** (not one of the built-in players below) are driven with **Space** and **⌘←** / **⌘→** sent to that app’s process—similar to the Tidal fallback—so behaviour depends on the app. For a site like Audiobookshelf, install it as a **Safari “Add to Dock” web app** so it has a normal bundle ID you can add to the list.
+
+**Now Playing** integration uses Apple’s private `MediaRemote.framework` (loaded with `dlopen` at runtime). If it breaks after an OS upgrade, turn off **Prefer Now Playing app when it is in the list** in settings.
+
+**Play / pause memory:** the last app you controlled with **media keys** (play, pause, skip, etc.) is remembered so the next **Play** press targets that app again instead of jumping to whatever is first in the list. When **Now Playing** (Media Remote) settles on a **different whitelisted** app than that one—usually because you started playback from that app’s UI—the memory is cleared so keys follow the new client. Hardware play keys sometimes fire **repeat “down” events** without a release; MMKF ignores those repeats to avoid accidental double toggles.
 
 Download the compiled application from my [Releases](https://github.com/quppi/macmediakeyforwarder/releases).
 
