@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "MacMediaKeyForwarder (Debug)",
+      "program": "${workspaceFolder}/.derivedData/Build/Products/Debug/MacMediaKeyForwarder.app/Contents/MacOS/MacMediaKeyForwarder",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "xcodebuild: debug"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "xcodebuild: debug",
+      "type": "shell",
+      "command": "xcodebuild",
+      "args": [
+        "-project",
+        "MacMediaKeyForwarder.xcodeproj",
+        "-scheme",
+        "MacMediaKeyForwarder",
+        "-configuration",
+        "Debug",
+        "-derivedDataPath",
+        "${workspaceFolder}/.derivedData",
+        "build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
